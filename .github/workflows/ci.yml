@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/${{ github.repository }}:test
+          tags: ghcr.io/${GITHUB_REPOSITORY,,}:test
 
   docker-test:
     name: Test Docker image
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       litellm-proxy:
-        image: ghcr.io/${{ github.repository }}:test
+        image: ghcr.io/${GITHUB_REPOSITORY,,}:test
         env:
           LITELLM_LOG: "INFO"
         ports:
