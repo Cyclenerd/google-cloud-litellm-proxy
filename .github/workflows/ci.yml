@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/${GITHUB_REPOSITORY,,}:test
+          tags: ghcr.io/cyclenerd/google-cloud-litellm-proxy:test
 
   docker-test:
     name: Test Docker image
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       litellm-proxy:
-        image: ghcr.io/${GITHUB_REPOSITORY,,}:test
+        image: ghcr.io/cyclenerd/google-cloud-litellm-proxy:test
         env:
           LITELLM_LOG: "INFO"
         ports:
