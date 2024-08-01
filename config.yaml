@@ -1,0 +1,58 @@
+# LiteLLM Documentation: https://docs.litellm.ai/docs/providers/vertex
+model_list:
+# gpt-3.5-turbo --> chat-bison : For 'litellm --test' and backward compatibility
+- model_name: gpt-3.5-turbo
+  litellm_params:
+    model: chat-bison
+# Google models
+# Documentation: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models
+- model_name: google/chat-bison
+  litellm_params:
+    model: chat-bison
+- model_name: google/chat-bison-32k
+  litellm_params:
+    model: chat-bison-32k
+- model_name: google/codechat-bison
+  litellm_params:
+    model: codechat-bison
+- model_name: google/codechat-bison-32k
+  litellm_params:
+    model: codechat-bison-32k
+- model_name: google/gemini-1.0-pro
+  litellm_params:
+    model: vertex_ai/gemini-pro
+- model_name: google/gemini-1.5-pro
+  litellm_params:
+    model: vertex_ai/gemini-1.5-pro
+# Partner models
+# Meta
+# Documentation: https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama
+# Model card: https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama3-405b-instruct-maas
+- model_name: meta/llama3-405b
+  litellm_params:
+    model: vertex_ai/meta/llama3-405b-instruct-maas
+    vertex_ai_location: "us-central1" # https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama#llama-3.1-405b
+# Anthropic
+# Documentation: https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude
+# Model card: https://console.cloud.google.com/vertex-ai/publishers/anthropic/model-garden/claude-3-5-sonnet
+- model_name: anthropic/claude-3-5-sonnet
+  litellm_params:
+    model: vertex_ai/claude-3-5-sonnet@20240620
+    vertex_ai_location: "us-east5" # https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude#anthropic_claude_quotas_and_supported_context_length
+# Mistral AI
+# Documentation: https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral
+# Model card: https://console.cloud.google.com/vertex-ai/publishers/mistralai/model-garden/mistral-large
+- model_name: mistralai/mistral-large
+  litellm_params:
+    model: vertex_ai/mistral-large@2407
+    vertex_ai_location: "us-central1" # https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral#mistral-large-2407
+# Best practices for production
+# Documentation: https://docs.litellm.ai/docs/proxy/prod
+litellm_settings:
+  telemetry: false
+  set_verbose: false
+  json_logs: true
+  # Some vertex_ai models (like Llama 3.1) does not support parameters like: {'temperature': 0.2, 'top_p': 0.9}
+  drop_params: true
+  num_retries: 3 # retry call 3 times on each model_name
+  request_timeout: 15 # raise Timeout error if call takes longer than 15s.
