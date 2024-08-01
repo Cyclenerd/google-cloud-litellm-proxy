@@ -1,0 +1,5 @@
+FEATURE_FLAGS: "-openai_api_key,-openai_proxy_url,-dalle,-check_updates,-welcome_suggest"
+DEFAULT_AGENT_CONFIG: "model=google/gemini-1.5-pro"
+ENABLED_OLLAMA: "0"
+ENABLED_OPENAI: "1"
+OPENAI_MODEL_LIST: "-all,+google/gemini-1.5-pro,+meta/llama3-405b,+anthropic/claude-3-5-sonnet,+mistralai/mistral-large"
