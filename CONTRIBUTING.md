@@ -24,7 +24,7 @@ in your GitHub account.
 Clone your newly created fork of the repository to your local machine with the following command:
 
 ```bash
-git clone https://github.com/your-username/template.git
+git clone https://github.com/your-username/google-cloud-litellm-proxy.git
 ```
 
 ## Create a New Branch 🌿
