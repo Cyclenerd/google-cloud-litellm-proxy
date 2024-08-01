@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+.venv/
+.vscode
+**/__pycache__
+**/.pytest_cache
+my-lobe-chat-envs.yaml
