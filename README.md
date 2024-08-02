@@ -16,8 +16,6 @@ Requirements:
 * Google Cloud Project with billing enabled
 * Cloud Shell access within your project
 
-<walkthrough-project-setup></walkthrough-project-setup>
-
 Follow the steps below step by step (copy & paste).
 Only skip steps if you know what you are doing and are confident.
 
@@ -34,6 +32,8 @@ gcloud auth login
 ```
 
 ## Configuration
+
+<walkthrough-project-setup></walkthrough-project-setup>
 
 Set Google Cloud project ID.
 Replace with your current Google Cloud project ID:
@@ -325,9 +325,9 @@ Deploy Cloud Run service with Lobe Chat frontend:
 ```bash
 cp -f "lobe-chat-envs.yaml" "my-lobe-chat-envs.yaml"
 echo >> "my-lobe-chat-envs.yaml"
-echo "OPENAI_API_KEY: \"sk-${MY_RANDOM}\"" >> "my-lobe-chat-envs.yaml"
-echo "OPENAI_PROXY_URL: \"${MY_LITELLM_PROXY_URL}\"" >> "my-lobe-chat-envs.yaml"
-echo "ACCESS_CODE: \"${MY_ACCESS_CODE}\"" >> "my-lobe-chat-envs.yaml"
+echo "OPENAI_API_KEY: sk-${MY_RANDOM}" >> "my-lobe-chat-envs.yaml"
+echo "OPENAI_PROXY_URL: $MY_LITELLM_PROXY_URL" >> "my-lobe-chat-envs.yaml"
+echo "ACCESS_CODE: $MY_ACCESS_CODE" >> "my-lobe-chat-envs.yaml"
 gcloud run deploy "lobe-chat" \
     --image="${MY_REGION}-docker.pkg.dev/${MY_PROJECT_ID}/${MY_ARTIFACT_REPOSITORY}/lobe-chat:latest" \
     --memory=512Mi \
@@ -386,7 +386,7 @@ Delete Artifact Registry repositoriy:
 
 ```bash
 gcloud artifacts repositories delete "$MY_ARTIFACT_REPOSITORY" \
-    --region="$MY_REGION" \
+    --location="$MY_REGION" \
     --project="$MY_PROJECT_ID" \
     --quiet
 ```
@@ -407,6 +407,38 @@ gcloud storage rm -r "gs://docker-build-$MY_PROJECT_NUMBER" \
     --quiet
 ```
 
+## Organization Policies
+
+If your project is a standard Google Cloud project, no adjustments should be necessary and all the steps mentioned should work without errors.
+
+However, if your Google project or organization has been customized and Organization Policies have been rolled out, the following may cause problems. Make sure they are set as mentioned here for your project.
+
+| Constraint                     | Value           |
+|--------------------------------|-----------------|
+| gcp.resourceLocations          | in:us-locations |
+| run.allowedIngress             | is:all          |
+| iam.allowedPolicyMemberDomains | allowAll        |
+
+YAML for [Fabric FAST Project Module](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric/tree/master/modules/project#organization-policiesd):
+
+```yaml
+org_policies:
+  "gcp.resourceLocations":
+    rules:
+    - allow:
+        values:
+        - in:us-locations
+  "run.allowedIngress":
+    rules:
+    - allow:
+        values:
+        - is:all
+  "iam.allowedPolicyMemberDomains":
+    rules:
+    - allow:
+        all: true
+```
+
 ## License
 
-All files in this repository are under the [Apache License, Version 2.0](./LICENSE) unless noted otherwise.
+All files in this repository are under the [Apache License, Version 2.0](https://github.com/Cyclenerd/google-cloud-litellm-proxy/blob/master/LICENSE) unless noted otherwise.
