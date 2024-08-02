@@ -16,6 +16,8 @@ Requirements:
 * Google Cloud Project with billing enabled
 * Cloud Shell access within your project
 
+<walkthrough-project-setup></walkthrough-project-setup>
+
 Follow the steps below step by step (copy & paste).
 Only skip steps if you know what you are doing and are confident.
 
@@ -34,10 +36,15 @@ gcloud auth login
 ## Configuration
 
 Set Google Cloud project ID.
-Replace `your-google-cloud-project-id` with your current Google Cloud project ID:
+Replace with your current Google Cloud project ID:
 
 ```bash
-MY_PROJECT_ID="your-google-cloud-project-id"
+MY_PROJECT_ID="<walkthrough-project-id/>"
+```
+
+Set default `gcloud` project:
+
+```bash
 gcloud config set project "$MY_PROJECT_ID"
 ```
 
@@ -67,21 +74,17 @@ Enable Google Cloud APIs:
 
  > Only necessary if the APIs are not yet activated in the project.
 
-<!-- Cloud Shell copy&paste does not work with a bash for loop -->
+ <walkthrough-enable-apis apis="iam.googleapis.com,aiplatform.googleapis.com,run.googleapis.com,artifactregistry.googleapis.com,cloudbuild.googleapis.com,containeranalysis.googleapis.com,containerscanning.googleapis.com"></walkthrough-enable-apis>
+
+
+<!-- Cloud Shell copy&paste does not work with bash for loop and comments -->
 ```bash
- # Identity and Access Management (IAM)
 gcloud services enable "iam.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-# Vertex AI Platform
 gcloud services enable "aiplatform.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-# Cloud Run
 gcloud services enable "run.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-# Artifact Registry
 gcloud services enable "artifactregistry.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-# Cloud Build
 gcloud services enable "cloudbuild.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-# Container Analysis
 gcloud services enable "containeranalysis.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-# Container Scanning
 gcloud services enable "containerscanning.googleapis.com" --project="$MY_PROJECT_ID" --quiet
 ```
 
@@ -143,6 +146,7 @@ gcloud projects add-iam-policy-binding "$MY_PROJECT_ID" \
     --role="roles/artifactregistry.writer" \
     --project="$MY_PROJECT_ID" \
     --quiet
+
 gcloud projects add-iam-policy-binding "$MY_PROJECT_ID" \
     --member="serviceAccount:docker-build@${MY_PROJECT_ID}.iam.gserviceaccount.com" \
     --role="roles/logging.logWriter" \
@@ -248,72 +252,36 @@ Test Google Gemini:
 
 ```bash
 curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer sk-$MY_RANDOM" \
---data '{
-      "model": "google/gemini-1.5-pro",
-      "messages": [
-        {
-          "role": "user",
-          "content": "what llm are you"
-        }
-      ]
-    }
-'
+    --header "Content-Type: application/json" \
+    --header "Authorization: Bearer sk-$MY_RANDOM" \
+    --data '{"model": "google/gemini-1.5-pro", "messages": [{"role": "user", "content": "what llm are you" }]}'
 ```
 
 Test Meta Llama 3:
 
 ```bash
 curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer sk-$MY_RANDOM" \
---data '{
-      "model": "meta/llama3-405b",
-      "messages": [
-        {
-          "role": "user",
-          "content": "what llm are you"
-        }
-      ]
-    }
-'
+    --header "Content-Type: application/json" \
+    --header "Authorization: Bearer sk-$MY_RANDOM" \
+    --data '{"model": "meta/llama3-405b", "messages": [{"role": "user", "content": "what llm are you" }]}'
 ```
 
 Test Anthropic Claude 3.5 Sonnet:
 
 ```bash
 curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer sk-$MY_RANDOM" \
---data '{
-      "model": "anthropic/claude-3-5-sonnet",
-      "messages": [
-        {
-          "role": "user",
-          "content": "what llm are you"
-        }
-      ]
-    }
-'
+    --header "Content-Type: application/json" \
+    --header "Authorization: Bearer sk-$MY_RANDOM" \
+    --data '{"model": "anthropic/claude-3-5-sonnet", "messages": [{"role": "user", "content": "what llm are you" }]}'
 ```
 
 Test Mistral AI Mistral Large:
 
 ```bash
 curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer sk-$MY_RANDOM" \
---data '{
-      "model": "mistralai/mistral-large",
-      "messages": [
-        {
-          "role": "user",
-          "content": "what llm are you"
-        }
-      ]
-    }
-'
+    --header "Content-Type: application/json" \
+    --header "Authorization: Bearer sk-$MY_RANDOM" \
+    --data '{"model": "mistralai/mistral-large", "messages": [{"role": "user", "content": "what llm are you" }]}'
 ```
 
 ## [Optional] Deploy Lobe Chat
@@ -355,13 +323,11 @@ echo "Password: '$MY_ACCESS_CODE'"
 Deploy Cloud Run service with Lobe Chat frontend:
 
 ```bash
-# Create YAML file with all environment variables
 cp -f "lobe-chat-envs.yaml" "my-lobe-chat-envs.yaml"
 echo >> "my-lobe-chat-envs.yaml"
 echo "OPENAI_API_KEY: \"sk-${MY_RANDOM}\"" >> "my-lobe-chat-envs.yaml"
 echo "OPENAI_PROXY_URL: \"${MY_LITELLM_PROXY_URL}\"" >> "my-lobe-chat-envs.yaml"
 echo "ACCESS_CODE: \"${MY_ACCESS_CODE}\"" >> "my-lobe-chat-envs.yaml"
-# Deploy
 gcloud run deploy "lobe-chat" \
     --image="${MY_REGION}-docker.pkg.dev/${MY_PROJECT_ID}/${MY_ARTIFACT_REPOSITORY}/lobe-chat:latest" \
     --memory=512Mi \
@@ -397,6 +363,7 @@ gcloud run services delete "lobe-chat" \
     --region="$MY_REGION" \
     --project="$MY_PROJECT_ID" \
     --quiet
+
 gcloud iam service-accounts delete "lobe-chat@${MY_PROJECT_ID}.iam.gserviceaccount.com" \
     --project="$MY_PROJECT_ID" \
     --quiet
@@ -409,6 +376,7 @@ gcloud run services delete "litellm-proxy" \
     --region="$MY_REGION" \
     --project="$MY_PROJECT_ID" \
     --quiet
+
 gcloud iam service-accounts delete "litellm-proxy@${MY_PROJECT_ID}.iam.gserviceaccount.com" \
     --project="$MY_PROJECT_ID" \
     --quiet
