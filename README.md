@@ -74,18 +74,18 @@ Enable Google Cloud APIs:
 
  > Only necessary if the APIs are not yet activated in the project.
 
- <walkthrough-enable-apis apis="iam.googleapis.com,aiplatform.googleapis.com,run.googleapis.com,artifactregistry.googleapis.com,cloudbuild.googleapis.com,containeranalysis.googleapis.com,containerscanning.googleapis.com"></walkthrough-enable-apis>
-
-
 <!-- Cloud Shell copy&paste does not work with bash for loop and comments -->
 ```bash
-gcloud services enable "iam.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-gcloud services enable "aiplatform.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-gcloud services enable "run.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-gcloud services enable "artifactregistry.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-gcloud services enable "cloudbuild.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-gcloud services enable "containeranalysis.googleapis.com" --project="$MY_PROJECT_ID" --quiet
-gcloud services enable "containerscanning.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+gcloud services enable \
+    iam.googleapis.com \
+    aiplatform.googleapis.com \
+    run.googleapis.com \
+    artifactregistry.googleapis.com \
+    cloudbuild.googleapis.com \
+    containeranalysis.googleapis.com \
+    containerscanning.googleapis.com \
+    --project="$MY_PROJECT_ID" \
+    --quiet
 ```
 
 ### Enable Vertex AI Models (Manual Step)
@@ -128,7 +128,7 @@ gcloud projects add-iam-policy-binding "$MY_PROJECT_ID" \
     --quiet
 ```
 
-Service account for building Docker container images (Cloud Build):
+Create service account for building Docker container images (Cloud Build):
 
 ```bash
 gcloud iam service-accounts create "docker-build" \
@@ -169,7 +169,7 @@ Create Artifact Registry repositoriy for Docker container images:
 
 ```bash
 gcloud artifacts repositories create "$MY_ARTIFACT_REPOSITORY" \
-    --repository-format="docker"\
+    --repository-format="docker" \
     --description="Docker contrainer registry for LiteLLM proxy" \
     --location="$MY_REGION" \
     --project="$MY_PROJECT_ID" \
