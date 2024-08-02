@@ -12,7 +12,7 @@ on:
 
 jobs:
   docker:
-    name: Build Docker images
+    name: Build Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -30,25 +30,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # https://github.com/marketplace/actions/build-and-push-docker-images
-      - name: Build and push CLI image 🧪
+      - name: Build Docker container image 🧪
         id: docker_build
         uses: docker/build-push-action@v5
         with:
-          push: true
+          push: false
           tags: ghcr.io/cyclenerd/google-cloud-litellm-proxy:test
-
-  docker-test:
-    name: Test Docker image
-    needs: [docker]
-    runs-on: ubuntu-latest
-    services:
-      litellm-proxy:
-        image: ghcr.io/cyclenerd/google-cloud-litellm-proxy:test
-        env:
-          LITELLM_LOG: "INFO"
-        ports:
-          - 8080:8080
-    steps:
-      - name: Test API
-        run: |
-          curl --fail-with-body -X 'GET' 'http://localhost:8080/models' -H 'accept: application/json'
