@@ -20,9 +20,6 @@ WORKDIR /app
 # Log Python messages immediately instead of being buffered
 ENV PYTHONUNBUFFERED True
 
-# Disable any healthcheck inherited from the base image
-HEALTHCHECK NONE
-
 # Default HTTP port
 EXPOSE 8080/tcp
 
