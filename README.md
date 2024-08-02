@@ -67,20 +67,22 @@ Enable Google Cloud APIs:
 
  > Only necessary if the APIs are not yet activated in the project.
 
+<!-- Cloud Shell copy&paste does not work with a bash for loop -->
 ```bash
-MY_GCP_SERVICES=(
-    'iam.googleapis.com'  # Identity and Access Management (IAM)
-    'aiplatform.googleapis.com'  # Vertex AI Platform
-    'run.googleapis.com'  # Cloud Run
-    'artifactregistry.googleapis.com'  # Artifact Registry
-    'cloudbuild.googleapis.com'  # Cloud Build
-    'containeranalysis.googleapis.com'  # Container Analysis
-    'containerscanning.googleapis.com'  # Container Scanning
-)
-# Enable each GCP service
-for MY_GCP_SERVICE in "${MY_GCP_SERVICES[@]}"; do
-    gcloud services enable "$MY_GCP_SERVICE" --project="$MY_PROJECT_ID" --quiet
-done
+ # Identity and Access Management (IAM)
+gcloud services enable "iam.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+# Vertex AI Platform
+gcloud services enable "aiplatform.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+# Cloud Run
+gcloud services enable "run.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+# Artifact Registry
+gcloud services enable "artifactregistry.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+# Cloud Build
+gcloud services enable "cloudbuild.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+# Container Analysis
+gcloud services enable "containeranalysis.googleapis.com" --project="$MY_PROJECT_ID" --quiet
+# Container Scanning
+gcloud services enable "containerscanning.googleapis.com" --project="$MY_PROJECT_ID" --quiet
 ```
 
 ### Enable Vertex AI Models (Manual Step)
