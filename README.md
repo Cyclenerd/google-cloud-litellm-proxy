@@ -16,12 +16,16 @@ Requirements:
 * Google Cloud Project with billing enabled
 * Cloud Shell access within your project
 
-Follow the steps below step by step (copy & paste).
-Only skip steps if you know what you are doing and are confident.
-
 You can execute everything using the Cloud Shell in your project.
 
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://shell.cloud.google.com/cloudshell/open?shellonly=true&ephemeral=false&cloudshell_git_repo=https://github.com/Cyclenerd/google-cloud-litellm-proxy&cloudshell_git_branch=master&cloudshell_tutorial=README.md)
+
+Follow the steps below step by step (copy & paste).
+
+![Screenshot: Cloud Shell](https://github.com/Cyclenerd/google-cloud-litellm-proxy/raw/master/img/cloud-shell.png)
+
+
+Only skip steps if you know what you are doing and are confident.
 
 ## Authenticate
 
