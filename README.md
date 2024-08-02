@@ -2,7 +2,7 @@
 
 This repository provides instructions to deploy a [LiteLLM proxy](https://github.com/BerriAI/litellm) server that allows you to interact with various Large Language Models (LLMs) hosted on Google Cloud Vertex AI using the OpenAI API format.
 
-![Screenshot: Lobe Chat](./img/lobe-chat.png)
+![Screenshot: Lobe Chat](https://github.com/Cyclenerd/google-cloud-litellm-proxy/raw/master/img/lobe-chat.png)
 
 Supported models include:
 
@@ -95,7 +95,7 @@ Navigate to the Model Garden model cards for each LLM you want to use and **enab
 
 Screenshot:
 
-![Screenshot: Claude](./img/claude.png)
+![Screenshot: Claude](https://github.com/Cyclenerd/google-cloud-litellm-proxy/raw/master/img/claude.png)
 
 ## Create Service Accounts
 
