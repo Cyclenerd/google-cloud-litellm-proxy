@@ -244,7 +244,7 @@ gcloud run deploy "litellm-proxy" \
     --quiet
 ```
 
-Done! You can now access via the proxy the LLM models:
+Done! Now wait three to five minutes and then you can test via the proxy the LLM models:
 
 ```bash
 MY_LITELLM_PROXY_URL="$(gcloud run services list --filter="litellm-proxy" --format="value(URL)" --quiet)"
