@@ -18,7 +18,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Log Python messages immediately instead of being buffered
-ENV PYTHONUNBUFFERED True
+ENV PYTHONUNBUFFERED="True"
 
 # Default HTTP port
 EXPOSE 8080/tcp
