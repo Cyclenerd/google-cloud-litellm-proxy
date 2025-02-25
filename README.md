@@ -279,6 +279,24 @@ curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
     --data '{"model": "anthropic/claude-3-5-sonnet", "messages": [{"role": "user", "content": "what llm are you" }]}'
 ```
 
+Test Anthropic Claude 3.7 Sonnet (non-thinking):
+
+```bash
+curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
+    --header "Content-Type: application/json" \
+    --header "Authorization: Bearer sk-$MY_RANDOM" \
+    --data '{"model": "anthropic/claude-3-7-sonnet", "messages": [{"role": "user", "content": "what AI are you" }]}'
+```
+
+Test Anthropic Claude 3.7 Sonnet (thinking):
+
+```bash
+curl --location "${MY_LITELLM_PROXY_URL}/chat/completions" \
+    --header "Content-Type: application/json" \
+    --header "Authorization: Bearer sk-$MY_RANDOM" \
+    --data '{"model": "anthropic/claude-3-7-sonnet", "messages": [{"role": "user", "content": "what AI are you", "thinking": {"type": "enabled", "budget_tokens": 1600}, "additional_drop_params": ["top_p", "top_k"]}]}'
+```
+
 Test Mistral AI Mistral Large:
 
 ```bash
