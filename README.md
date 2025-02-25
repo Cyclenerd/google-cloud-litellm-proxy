@@ -295,7 +295,7 @@ Build Docker container image for [🤯 Lobe Chat](https://github.com/lobehub/lob
 > ⏳ Will take approx. 15 minutes
 
 ```bash
-MY_LOBE_CHAT_VERSION="v1.7.8"
+MY_LOBE_CHAT_REVISION="0784156dab89e77a3327f5f87986f4c94f948944"
 gcloud builds submit "https://github.com/lobehub/lobe-chat.git" \
     --git-source-revision="$MY_LOBE_CHAT_VERSION" \
     --tag="${MY_REGION}-docker.pkg.dev/${MY_PROJECT_ID}/${MY_ARTIFACT_REPOSITORY}/lobe-chat:latest" \
@@ -386,7 +386,7 @@ gcloud iam service-accounts delete "litellm-proxy@${MY_PROJECT_ID}.iam.gservicea
     --quiet
 ```
 
-Delete Artifact Registry repositoriy:
+Delete Artifact Registry repository:
 
 ```bash
 gcloud artifacts repositories delete "$MY_ARTIFACT_REPOSITORY" \
