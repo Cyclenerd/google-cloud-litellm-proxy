@@ -1,4 +1,4 @@
-# Copyright 2024 Nils Knieling
+# Copyright 2024-2025 Nils Knieling
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The python:3.11-slim tag points to the latest release based on Debian 12 (bookworm)
-FROM python:3.11-slim
+# The python:3.12-slim tag points to the latest release based on Debian 12 (bookworm)
+FROM python:3.12-slim
 
 WORKDIR /app
 
