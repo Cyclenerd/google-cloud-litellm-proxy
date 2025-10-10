@@ -6,24 +6,15 @@ model_list:
     model: chat-bison
 # Google models
 # Documentation: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models
-- model_name: google/chat-bison
-  litellm_params:
-    model: chat-bison
-- model_name: google/chat-bison-32k
-  litellm_params:
-    model: chat-bison-32k
-- model_name: google/codechat-bison
-  litellm_params:
-    model: codechat-bison
-- model_name: google/codechat-bison-32k
-  litellm_params:
-    model: codechat-bison-32k
-- model_name: google/gemini-1.0-pro
-  litellm_params:
-    model: vertex_ai/gemini-pro
 - model_name: google/gemini-1.5-pro
   litellm_params:
     model: vertex_ai/gemini-1.5-pro
+- model_name: google/gemini-2.5-pro
+  litellm_params:
+    model: vertex_ai/gemini-2.5-pro
+- model_name: google/gemini-2.5-flash
+  litellm_params:
+    model: vertex_ai/gemini-2.5-flash
 # Partner models
 # Meta
 # Documentation: https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama

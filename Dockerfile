@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The python:3.12-slim tag points to the latest release based on Debian 12 (bookworm)
-FROM python:3.12-slim
+# Use python:3.14-slim image for a minimal Python 3.14 environment
+FROM python:3.14-slim
 
 WORKDIR /app
 
