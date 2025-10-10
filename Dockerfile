@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Use python:3.14-slim image for a minimal Python 3.14 environment
-FROM python:3.14-slim
+# Use python:3.13-slim image for a minimal Python 3.13 environment
+FROM python:3.13-slim
 
 WORKDIR /app
 
