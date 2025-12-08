@@ -1,3 +1,3 @@
 google-cloud-aiplatform==1.129.0
 anthropic[vertex]==0.75.0
-litellm[proxy]==1.80.7
+litellm[proxy]==1.80.8
