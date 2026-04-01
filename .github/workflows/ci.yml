@@ -32,7 +32,7 @@ jobs:
       # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Build Docker container image 🧪
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           push: false
           tags: ghcr.io/cyclenerd/google-cloud-litellm-proxy:test
